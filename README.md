@@ -21,5 +21,5 @@ Handle CRUD Operations using SpringBoot &amp; PostgreSQL
 
 1. Build the project using
   `mvn clean install`
-2. Rename the war/jar file to 'got'
+2. Rename the war/jar file
 3. Deploy that file to server & restart the server.

@@ -19,6 +19,18 @@ public class User {
 	private String mobNo;
 	private String password;
 
+	public User() {
+	}
+
+	public User(long id, String name, String email, String mobNo, String password) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.mobNo = mobNo;
+		this.password = password;
+	}
+
 	public long getId() {
 		return id;
 	}

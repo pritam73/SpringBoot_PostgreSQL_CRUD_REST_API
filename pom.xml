@@ -11,7 +11,7 @@
 	<groupId>com.crud.restapi</groupId>
 	<artifactId>CRUD-Demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>SpringBoot_PostgreSQL_CRUD_RESTAPI</name>
 	<description>Handle CRUD Operation using spring boot &amp; postgreSQL</description>
 	<properties>

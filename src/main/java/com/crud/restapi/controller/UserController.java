@@ -1,6 +1,7 @@
 package com.crud.restapi.controller;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -85,10 +86,10 @@ public class UserController {
 		System.err.println(":::  UserController.updateUser :::");
 		ResultDTO<?> responsePacket = null;
 		try {
-			User isData = userService.isDataExist(reqData);
-			if (isData != null) {
-				responsePacket = new ResultDTO<>(userService.updateUser(reqData, isData), "User Updated Successfully",
-						true);
+			Optional<User> isData = userService.findUser(reqData);
+			if (isData.isPresent()) {
+				responsePacket = new ResultDTO<>(userService.updateUser(reqData, isData.get()),
+						"User Updated Successfully", true);
 				return new ResponseEntity<>(responsePacket, HttpStatus.OK);
 			} else {
 				responsePacket = new ResultDTO<>("Record not exist", false);

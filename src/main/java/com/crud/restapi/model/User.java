@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "users")
@@ -14,9 +15,13 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
+	@NotEmpty(message = "Name must not be empty")
 	private String name;
+	@NotEmpty(message = "Email must not be empty")
 	private String email;
+	@NotEmpty(message = "Mobile No must not be empty")
 	private String mobNo;
+	@NotEmpty(message = "Password must not be empty")
 	private String password;
 
 	public User() {

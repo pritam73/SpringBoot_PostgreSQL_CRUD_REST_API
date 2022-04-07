@@ -1,5 +1,7 @@
 package com.crud.restapi.controller;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.crud.restapi.bean.BeanValidator;
 import com.crud.restapi.bean.ResultDTO;
 import com.crud.restapi.model.User;
 import com.crud.restapi.service.UserService;
@@ -23,11 +26,20 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private BeanValidator beanValidator;
+
 	@PostMapping("/createUser")
 	public ResponseEntity<?> createUser(@RequestBody User reqData) {
 		System.err.println(":::  UserController.createUser :::");
 		ResultDTO<?> responsePacket = null;
 		try {
+			ArrayList<String> errorList = beanValidator.userValidate(reqData);
+			if (errorList.size() != 0) {
+				ResultDTO<ArrayList<String>> errorPacket = new ResultDTO<>(errorList,
+						"Above fields values must not be empty", false);
+				return new ResponseEntity<>(errorPacket, HttpStatus.BAD_REQUEST);
+			}
 			User isData = userService.isDataExist(reqData);
 			if (isData == null) {
 				responsePacket = new ResultDTO<>(userService.createUser(reqData), "User Created Successfully", true);
